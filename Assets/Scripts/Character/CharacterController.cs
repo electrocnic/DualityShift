@@ -21,7 +21,7 @@ public class CharacterController : MonoBehaviour
     {
         horizontalMove += Input.GetAxisRaw("Horizontal") * accel;
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             jump = true;
         }
