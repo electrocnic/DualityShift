@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 1563685564}
   - component: {fileID: 1563685568}
   - component: {fileID: 1563685567}
+  - component: {fileID: 1563685569}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -307,8 +308,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563685563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6924906, y: 0.7051316, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.21, y: 1.66, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -368,3 +369,31 @@ PolygonCollider2D:
       - {x: 0.095, y: -0.11}
       - {x: 0.095, y: 0.049999997}
       - {x: 0.085, y: 0.08}
+--- !u!114 &1563685569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563685563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee8211c82a21db7987fb0f72f53ef04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_JumpForce: 400
+  m_CrouchSpeed: 0.36
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  m_WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundCheck: {fileID: 0}
+  m_CeilingCheck: {fileID: 0}
+  m_CrouchDisableCollider: {fileID: 0}
+  OnLandEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrouchEvent:
+    m_PersistentCalls:
+      m_Calls: []
