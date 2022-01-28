@@ -9,21 +9,27 @@ public class CharacterController : MonoBehaviour
 
     private float horizontalMove = 0f;
     private float accel = 1f;
+    private bool jump = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         horizontalMove += Input.GetAxisRaw("Horizontal") * accel;
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        jump = false;
     }
 }
