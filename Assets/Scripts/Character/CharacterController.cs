@@ -1,0 +1,29 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharacterController : MonoBehaviour
+{
+    [SerializeField] CharacterController2d controller;
+
+    private float horizontalMove = 0f;
+    private float accel = 1f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        horizontalMove += Input.GetAxisRaw("Horizontal") * accel;
+    }
+
+    private void FixedUpdate()
+    {
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
+    }
+}
