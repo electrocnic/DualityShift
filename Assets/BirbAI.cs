@@ -7,12 +7,19 @@ public class BirbAI : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private Transform pfBullet;
-    [SerializeField] private float maxHorizontalMovementForce = 100f;
-    [SerializeField] private float maxVerticalMovementForce = 100f;
-    [SerializeField] private float horizontalForceMultiplier = 10f;
-    [SerializeField] private float verticalForceMultiplier = 10f;
-
+    [SerializeField] private float maxForce = 100f;
+    [SerializeField] private float horizontalProporionalForceMultiplier = 10f;
+    [SerializeField] private float verticalProportionalForceMultiplier = 10f;
+    [SerializeField] private float horizontalDerivativeForceMultiplier = 10f;
+    [SerializeField] private float verticalDerivativeForceMultiplier = 10f;
+    [SerializeField] private float maxSpeed = 400f;
     private float lastShot = 0f;
+    private Vector2 lastDPos = Vector2.zero;
+
+    private void Start()
+    {
+        lastDPos = target.position - transform.position;
+    }
 
     private void FixedUpdate()
     {
@@ -27,9 +34,17 @@ public class BirbAI : MonoBehaviour
         }
 
         var rb = GetComponent<Rigidbody2D>();
-        var targetPos = (Vector2)target.position + new Vector2(5f, 5f);
+        var targetPos = (Vector2) target.position + new Vector2(5f, 5f);
         var dpos = targetPos - rb.position;
-        rb.AddForce(new Vector2(Math.Clamp(dpos.x * horizontalForceMultiplier, -maxHorizontalMovementForce, maxHorizontalMovementForce), Math.Clamp(dpos.y * verticalForceMultiplier, -maxVerticalMovementForce, maxVerticalMovementForce)));
+        var ddpos = dpos - lastDPos;
+        Debug.Log(ddpos);
+        var controlOutput = new Vector2(dpos.x * horizontalProporionalForceMultiplier, dpos.y * verticalProportionalForceMultiplier) + new Vector2(ddpos.x * horizontalDerivativeForceMultiplier, ddpos.y * verticalDerivativeForceMultiplier);
+        lastDPos = dpos;
+        rb.AddForce(new Vector2(
+            Math.Clamp(controlOutput.x, -maxForce, maxForce),
+            Math.Clamp(controlOutput.y, -maxForce, maxForce)));
+        rb.velocity = new Vector2(Math.Clamp(rb.velocity.x, -maxSpeed, maxSpeed),
+            Math.Clamp(rb.velocity.y, -maxSpeed, maxSpeed));
     }
 
     private void OnTriggerEnter2D(Collider2D col)
