@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (swapDirection)
         {
-            horizontalMove *= 0.8f;
+            horizontalMove *= 0.6f;
         }
         horizontalMove += dir * acceleration;
         if (horizontalMove > maxSpeed)
@@ -53,6 +53,15 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalMove < -maxSpeed)
         {
             horizontalMove = -maxSpeed;
+        }
+
+        if (dir == 0)
+        {
+            horizontalMove *= 0.95f;
+            if (Math.Abs(horizontalMove) < 1f)
+            {
+                horizontalMove = 0f * Math.Sign(horizontalMove);
+            }
         }
         
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
