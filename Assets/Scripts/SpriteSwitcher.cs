@@ -16,6 +16,7 @@ public class SpriteSwitcher : MonoBehaviour {
         SpriteAnimator = GetComponent<Animator>();
         dualityModeController = Resources.FindObjectsOfTypeAll<DualityModeController>()[0];
         dualityModeController.OnWorldSwitched += DualityModeControllerOnOnWorldSwitched;
+        DualityModeControllerOnOnWorldSwitched(null, new WorldSwitched(dualityModeController.WorldState));
     }
 
     private void DualityModeControllerOnOnWorldSwitched(object sender, EventArgs eventArgs) {
