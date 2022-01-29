@@ -12372,9 +12372,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee8211c82a21db7987fb0f72f53ef04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 400
+  m_JumpForce: 500
+  m_MidAirJumpForce: 25
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0
+  m_AirMovementSmoothing: 0.2
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
@@ -12383,6 +12385,9 @@ MonoBehaviour:
   m_CeilingCheck: {fileID: 1315469594}
   m_CrouchDisableCollider: {fileID: 0}
   m_PotionFillStatus: 0
+  m_MaxJumpHeight: 20
+  m_JumpHeight: 0
+  m_StartedAtJumpCounter: -1
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -12403,8 +12408,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1563685569}
   horizontalMove: 0
-  acceleration: 15
-  maxSpeed: 300
+  acceleration: 8
+  maxSpeed: 150
+  jump: 0
+  jumpCounter: 0
 --- !u!114 &1563685571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12918,7 +12925,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6955782, y: 1}
+    m_SensorSize: {x: 2.1233141, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
