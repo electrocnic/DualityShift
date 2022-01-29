@@ -12,8 +12,10 @@ public class Bullet : MonoBehaviour
     {
         var rb = GetComponent<Rigidbody2D>();
         var dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - rb.transform.position;
-        dir.Normalize();
-        transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(dir, Vector3.right));
+        var dir2 = new Vector2(dir.x, dir.y);
+        dir2.Normalize();
+        dir = dir2;
+        transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(transform.forward, dir, new Vector3(0, 0, 1)));
         transform.position += dir * 3f;
         rb.AddForce(dir * projectileSpeed);
         Destroy(gameObject, 5f);
