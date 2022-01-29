@@ -63,6 +63,14 @@ public class CharacterController2d : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump)
 	{
+		if (move != 0)
+		{
+			GetComponent<Animator>().enabled = true;
+		}
+		else
+		{
+			GetComponent<Animator>().enabled = false;
+		}
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
 		{
