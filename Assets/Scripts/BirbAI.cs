@@ -13,7 +13,7 @@ public class BirbAI : MonoBehaviour {
     [SerializeField] private float horizontalDerivativeForceMultiplier = 10f;
     [SerializeField] private float verticalDerivativeForceMultiplier = 10f;
     [SerializeField] private float maxSpeed = 400f;
-    [SerializeField] private Vector2 followOffset;
+    private Vector2 followOffset;
     private float lastShot = 0f;
     private Vector2 lastDPos = Vector2.zero;
 
