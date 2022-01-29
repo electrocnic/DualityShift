@@ -24,7 +24,7 @@ public class BirbAI : MonoBehaviour
     private void FixedUpdate()
     {
         float t = Time.time;
-        if (t - lastShot > 0.3f)
+        if (t - lastShot > 1.4f)
         {
             var bullet = Instantiate(pfBullet, transform.position, Quaternion.identity);
             var bullet2 = bullet.GetComponent<Bullet>();
