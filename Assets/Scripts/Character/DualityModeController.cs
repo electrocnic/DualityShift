@@ -15,15 +15,18 @@ public class DualityModeController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.LeftShift) && controller.getPotionFillStatus() > 0.0f) {
+    void Update() {
+        bool leftShiftPressed = Input.GetKeyDown(KeyCode.LeftShift);
+        if (leftShiftPressed && controller.getPotionFillStatus() > 0.0f && !world2.activeInHierarchy) {
             world2.SetActive(true);
             world1.SetActive(false);
-            controller.setPotionFillStatus(MathF.Max(0.0f, controller.getPotionFillStatus() - potionConsumationSpeed));
-        } else {
+        } else if (controller.getPotionFillStatus() <= 0.0f || (leftShiftPressed && world2.activeInHierarchy)) {
             world1.SetActive(true);
             world2.SetActive(false);
+        }
+
+        if (world2.activeInHierarchy) {
+            controller.setPotionFillStatus(MathF.Max(0.0f, controller.getPotionFillStatus() - potionConsumationSpeed));
         }
     }
 }
