@@ -27,7 +27,7 @@ public class BirbAI : MonoBehaviour {
         followOffset = new Vector2((float)Math.Cos(phi), (float)Math.Sin(phi)) * r;
     }
 
-    private void Update() {
+    private void FixedUpdate() {
         if (!target) {
             return;
         }
