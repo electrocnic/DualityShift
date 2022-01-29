@@ -35,4 +35,17 @@ public class Bullet : MonoBehaviour
     {
         this.origin = origin;
     }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject == origin)
+        {
+            return;
+        }
+        var damageable = col.gameObject.GetComponent<Damageable>();
+        if (damageable != null)
+        {
+            damageable.Damage(100f);
+        }
+    }
 }
