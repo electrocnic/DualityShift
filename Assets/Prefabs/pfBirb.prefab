@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1421812627120727690}
   - component: {fileID: 1421812627120727688}
   - component: {fileID: 1421812627120727689}
+  - component: {fileID: 2645557235934823377}
   m_Layer: 0
   m_Name: pfBirb
   m_TagString: Untagged
@@ -128,7 +129,7 @@ MonoBehaviour:
   verticalProportionalForceMultiplier: 10
   horizontalDerivativeForceMultiplier: 100
   verticalDerivativeForceMultiplier: 10
-  maxSpeed: 400
+  maxSpeed: 300
 --- !u!58 &1421812627120727690
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -180,3 +181,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   pfPuff: {fileID: 6433890382240477646, guid: e0c2985287cbca945abe701374ab3f58, type: 3}
+--- !u!114 &2645557235934823377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421812627120727686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41282a4f1327b3a9e9273472f6e08453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRainbowCharacter: {fileID: 9100000, guid: 82264d2eb9575cdefbb86181d18ce1a3, type: 2}
+  spriteDarkCharacter: {fileID: 9100000, guid: a073483e96f3fcddb84775110c66c449, type: 2}

@@ -10,25 +10,28 @@ public class DualityModeController : MonoBehaviour
     [SerializeField] private float potionConsumationSpeed = 0.01f;
     [SerializeField] AnimatorController spriteRainbowCharacter;
     [SerializeField] AnimatorController spriteDarkCharacter;
-    private SpriteRenderer m_SpriteRenderer;
     private Animator m_SpriteAnimator;
+
+    public event EventHandler OnWorldSwitched;
     
     // Start is called before the first frame update
     void Start() {
-        m_SpriteRenderer = controller.GetComponent<SpriteRenderer>();
         m_SpriteAnimator = controller.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update() {
         bool leftShiftPressed = Input.GetKeyDown(KeyCode.LeftShift);
-        if (leftShiftPressed && controller.getPotionFillStatus() > 0.0f && !world2.activeInHierarchy) {
+        if (leftShiftPressed && controller.getPotionFillStatus() > 0.0f && !world2.activeInHierarchy)
+        {
+            OnWorldSwitched?.Invoke(this, new WorldSwitched(WorldSwitched.World.Dark));
             world2.SetActive(true);
             world1.SetActive(false);
             //controller.GetComponent<SpriteRenderer>().sprite = spriteDarkCharacter;
             m_SpriteAnimator.runtimeAnimatorController = spriteDarkCharacter;
             controller.GetComponent<SpriteRenderer>().flipX = true;
         } else if (controller.getPotionFillStatus() <= 0.0f || (leftShiftPressed && world2.activeInHierarchy)) {
+            OnWorldSwitched?.Invoke(this, new WorldSwitched(WorldSwitched.World.Light));
             world1.SetActive(true);
             world2.SetActive(false);
             // controller.GetComponent<SpriteRenderer>().sprite = spriteRainbowCharacter;
@@ -40,4 +43,17 @@ public class DualityModeController : MonoBehaviour
             controller.setPotionFillStatus(MathF.Max(0.0f, controller.getPotionFillStatus() - potionConsumationSpeed));
         }
     }
+}
+
+internal class WorldSwitched : EventArgs {
+    public WorldSwitched(World newWorld) {
+        this.NewWorld = newWorld;
+    }
+
+    public enum World {
+        Light,
+        Dark,
+    }
+
+    public World NewWorld { get; set; }
 }
