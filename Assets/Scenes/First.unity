@@ -12651,10 +12651,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1563685566}
   pfBullet: {fileID: 2929003950310744974, guid: f33ff74341fe539ac9236d10260d80e4, type: 3}
-  maxHorizontalMovementForce: 100
-  maxVerticalMovementForce: 100
-  horizontalForceMultiplier: 10
-  verticalForceMultiplier: 10
+  maxForce: 100
+  horizontalProporionalForceMultiplier: 10
+  verticalProportionalForceMultiplier: 10
+  horizontalDerivativeForceMultiplier: 100
+  verticalDerivativeForceMultiplier: 10
+  maxSpeed: 400
 --- !u!50 &1911607434
 Rigidbody2D:
   serializedVersion: 4
