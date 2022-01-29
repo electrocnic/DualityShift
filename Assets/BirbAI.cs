@@ -37,7 +37,7 @@ public class BirbAI : MonoBehaviour
         var targetPos = (Vector2) target.position + new Vector2(5f, 5f);
         var dpos = targetPos - rb.position;
         var ddpos = dpos - lastDPos;
-        Debug.Log(ddpos);
+        // Debug.Log(ddpos);
         var controlOutput = new Vector2(dpos.x * horizontalProporionalForceMultiplier, dpos.y * verticalProportionalForceMultiplier) + new Vector2(ddpos.x * horizontalDerivativeForceMultiplier, ddpos.y * verticalDerivativeForceMultiplier);
         lastDPos = dpos;
         rb.AddForce(new Vector2(
