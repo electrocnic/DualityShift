@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BirbAI : MonoBehaviour {
     [SerializeField] public Transform target;
@@ -12,11 +13,18 @@ public class BirbAI : MonoBehaviour {
     [SerializeField] private float horizontalDerivativeForceMultiplier = 10f;
     [SerializeField] private float verticalDerivativeForceMultiplier = 10f;
     [SerializeField] private float maxSpeed = 400f;
+    private Vector2 followOffset;
     private float lastShot = 0f;
     private Vector2 lastDPos = Vector2.zero;
 
     private void Start() {
         lastDPos = target.position - transform.position;
+
+        var minAngle = 15f / 360f * 2f * Math.PI;
+        var maxAngle = Math.PI - minAngle;
+        var phi = Random.Range((float)minAngle, (float)maxAngle);
+        var r = Random.Range(4f, 10f);
+        followOffset = new Vector2((float)Math.Cos(phi), (float)Math.Sin(phi)) * r;
     }
 
     private void Update() {
@@ -34,7 +42,7 @@ public class BirbAI : MonoBehaviour {
         }
 
         var rb = GetComponent<Rigidbody2D>();
-        var targetPos = (Vector2)target.position + new Vector2(5f, 5f);
+        var targetPos = (Vector2)target.position + followOffset;
         var dpos = targetPos - rb.position;
         var ddpos = dpos - lastDPos;
         var controlOutput = new Vector2(Math.Clamp(dpos.x * horizontalProporionalForceMultiplier, -maxForce, maxForce),
