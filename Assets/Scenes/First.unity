@@ -11782,7 +11782,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!60 &1563685568
 PolygonCollider2D:
@@ -12359,7 +12359,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8890675, y: 1}
+    m_SensorSize: {x: 2.1607842, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12651,6 +12651,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1563685566}
   pfBullet: {fileID: 2929003950310744974, guid: f33ff74341fe539ac9236d10260d80e4, type: 3}
+  maxHorizontalMovementForce: 100
+  maxVerticalMovementForce: 100
+  horizontalForceMultiplier: 10
+  verticalForceMultiplier: 10
 --- !u!50 &1911607434
 Rigidbody2D:
   serializedVersion: 4
