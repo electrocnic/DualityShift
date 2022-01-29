@@ -13,7 +13,9 @@ public class PlayerShootProjectiles : MonoBehaviour
         {
             var vel = GetComponent<Rigidbody2D>().velocity;
             var go = Instantiate(pfBullet, transform.position, Quaternion.identity);
-            go.GetComponent<Rigidbody2D>().velocity = vel;
+            var bullet = go.GetComponent<Bullet>();
+            bullet.Origin(gameObject);
+            bullet.Target(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 }
