@@ -2,8 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mono.Cecil;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
+
+/**
+ * Keymap:
+ *
+ * R: Restart (after death)
+ * WASD: move (W = Jump)
+ * W, Space: Jump
+ * Left Shift: Consume Potion if available
+ */
 
 public class WorldController : MonoBehaviour {
     [SerializeField] CharacterController2d controller;
@@ -21,6 +31,12 @@ public class WorldController : MonoBehaviour {
         _random = new Random();
         pfBirb.GetComponent<BirbAI>().target = controller.transform;
         pfBirb.GetComponent<BirbAI>().pfBullet = pfBullet;
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            Application.LoadLevel(Application.loadedLevel);
+        }
     }
 
     // Update is called once per frame

@@ -27,7 +27,7 @@ public class BirbAI : MonoBehaviour {
         followOffset = new Vector2((float)Math.Cos(phi), (float)Math.Sin(phi)) * r;
     }
 
-    private void Update() {
+    private void FixedUpdate() {
         if (!target) {
             return;
         }
@@ -50,9 +50,10 @@ public class BirbAI : MonoBehaviour {
                             + new Vector2(ddpos.x * horizontalDerivativeForceMultiplier,
                                 ddpos.y * verticalDerivativeForceMultiplier);
         lastDPos = dpos;
+        Vector2 finalVel = new Vector2(Math.Clamp(controlOutput.x, -maxSpeed, maxSpeed),
+            Math.Clamp(controlOutput.y, -maxSpeed, maxSpeed));
         rb.AddForce(controlOutput);
-        rb.velocity = new Vector2(Math.Clamp(rb.velocity.x, -maxSpeed, maxSpeed),
-            Math.Clamp(rb.velocity.y, -maxSpeed, maxSpeed));
+        // rb.velocity = finalVel;
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
