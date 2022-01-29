@@ -7,6 +7,10 @@ public class BirbAI : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private Transform pfBullet;
+    [SerializeField] private float maxHorizontalMovementForce = 100f;
+    [SerializeField] private float maxVerticalMovementForce = 100f;
+    [SerializeField] private float horizontalForceMultiplier = 10f;
+    [SerializeField] private float verticalForceMultiplier = 10f;
 
     private float lastShot = 0f;
 
@@ -23,10 +27,9 @@ public class BirbAI : MonoBehaviour
         }
 
         var rb = GetComponent<Rigidbody2D>();
-        if (rb.position.y < 5f + target.position.y)
-        {
-            rb.AddForce(Vector2.up * 10f);
-        }
+        var targetPos = (Vector2)target.position + new Vector2(5f, 5f);
+        var dpos = targetPos - rb.position;
+        rb.AddForce(new Vector2(Math.Clamp(dpos.x * horizontalForceMultiplier, -maxHorizontalMovementForce, maxHorizontalMovementForce), Math.Clamp(dpos.y * verticalForceMultiplier, -maxVerticalMovementForce, maxVerticalMovementForce)));
     }
 
     private void OnTriggerEnter2D(Collider2D col)
