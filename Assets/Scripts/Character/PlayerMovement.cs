@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] CharacterController2d controller;
 
     private float horizontalMove = 0f;
     private float accel = 1f;
     private bool jump = false;
+
+    private bool swapDirection = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,16 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalMove += Input.GetAxisRaw("Horizontal") * accel;
+        float dir = Input.GetAxisRaw("Horizontal");
+        if (dir < 0 && horizontalMove > 0)
+        {
+            swapDirection = true;
+        }
+        else if (dir > 0 && horizontalMove < 0)
+        {
+            swapDirection = true;
+        }
+        horizontalMove += dir * accel;
 
         if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -29,6 +40,11 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (swapDirection)
+        {
+            horizontalMove *= 0.8f;
+            swapDirection = false;
+        }
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
