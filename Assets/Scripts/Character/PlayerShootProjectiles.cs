@@ -11,7 +11,9 @@ public class PlayerShootProjectiles : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(pfBullet, transform.position, Quaternion.identity);
+            var vel = GetComponent<Rigidbody2D>().velocity;
+            var go = Instantiate(pfBullet, transform.position, Quaternion.identity);
+            go.GetComponent<Rigidbody2D>().velocity = vel;
         }
     }
 }

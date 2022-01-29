@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] CharacterController2d controller;
 
-    private float horizontalMove = 0f;
+    public float horizontalMove = 0f;
     private float accel = 1f;
     private bool jump = false;
 
