@@ -50,9 +50,10 @@ public class BirbAI : MonoBehaviour {
                             + new Vector2(ddpos.x * horizontalDerivativeForceMultiplier,
                                 ddpos.y * verticalDerivativeForceMultiplier);
         lastDPos = dpos;
-        rb.AddForce(controlOutput);
-        rb.velocity = new Vector2(Math.Clamp(rb.velocity.x, -maxSpeed, maxSpeed),
-            Math.Clamp(rb.velocity.y, -maxSpeed, maxSpeed));
+        Vector2 finalVel = new Vector2(Math.Clamp(controlOutput.x, -maxSpeed, maxSpeed),
+            Math.Clamp(controlOutput.y, -maxSpeed, maxSpeed));
+        rb.AddForce(finalVel);
+        rb.velocity = finalVel;
     }
 
     private void OnTriggerEnter2D(Collider2D col) {

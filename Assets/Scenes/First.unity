@@ -308,8 +308,9 @@ GameObject:
   - component: {fileID: 79015527}
   - component: {fileID: 79015526}
   - component: {fileID: 79015525}
+  - component: {fileID: 79015529}
   m_Layer: 0
-  m_Name: TX Village Props Archert Target
+  m_Name: Obstacle TX Village Props Archert Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,14 +428,28 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79015524}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 9.33, y: -2.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 236627846}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &79015529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79015524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3954290b9c1b53dbbe7ecc73197ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 399
+  pfPuff: {fileID: 6433890382240477646, guid: e0c2985287cbca945abe701374ab3f58, type: 3}
 --- !u!1 &80469972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,6 +1662,7 @@ Transform:
   - {fileID: 828501111}
   - {fileID: 62752168}
   - {fileID: 658780611}
+  - {fileID: 79015528}
   m_Father: {fileID: 685317517}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2115,7 +2131,7 @@ Transform:
   - {fileID: 744958506}
   - {fileID: 1269036823}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &464489571
 GameObject:
@@ -3493,7 +3509,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &564091823
 GameObject:
@@ -5042,7 +5058,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &828501110
 PrefabInstance:
@@ -6564,7 +6580,7 @@ RectTransform:
   - {fileID: 15351654}
   - {fileID: 2042907393}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12784,7 +12800,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1771001897
 GameObject:
@@ -12918,7 +12934,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6955782, y: 1}
+    m_SensorSize: {x: 1.6452146, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
