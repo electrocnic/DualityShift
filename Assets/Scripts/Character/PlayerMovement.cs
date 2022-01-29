@@ -45,15 +45,7 @@ public class PlayerMovement : MonoBehaviour
             horizontalMove *= 0.6f;
         }
         horizontalMove += dir * acceleration;
-        if (horizontalMove > maxSpeed)
-        {
-            horizontalMove = maxSpeed;
-        }
-
-        if (horizontalMove < -maxSpeed)
-        {
-            horizontalMove = -maxSpeed;
-        }
+        horizontalMove = Math.Clamp(horizontalMove, -maxSpeed, maxSpeed);
 
         if (dir == 0)
         {
