@@ -12449,6 +12449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  pfPuff: {fileID: 6433890382240477646, guid: e0c2985287cbca945abe701374ab3f58, type: 3}
 --- !u!1 &1565962470
 GameObject:
   m_ObjectHideFlags: 0
@@ -12917,7 +12918,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5050251, y: 1}
+    m_SensorSize: {x: 1.6955782, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

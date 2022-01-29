@@ -17,8 +17,6 @@ public class DualityModeController : MonoBehaviour
     void Start() {
         m_SpriteRenderer = controller.GetComponent<SpriteRenderer>();
         m_SpriteAnimator = controller.GetComponent<Animator>();
-        Debug.Log("m_SpriteRenderer loaded: " + m_SpriteRenderer);
-        Debug.Log("m_SpriteAnimator loaded: " + m_SpriteAnimator);
     }
 
     // Update is called once per frame
