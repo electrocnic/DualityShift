@@ -1,15 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 public class SpriteSwitcher : MonoBehaviour {
     private Animator SpriteAnimator;
-    [SerializeField] AnimatorController spriteRainbowCharacter;
-    [SerializeField] AnimatorController spriteDarkCharacter;
+    [SerializeField] RuntimeAnimatorController spriteRainbowCharacter;
+    [SerializeField] RuntimeAnimatorController spriteDarkCharacter;
     private DualityModeController dualityModeController;
 
     private void Start() {

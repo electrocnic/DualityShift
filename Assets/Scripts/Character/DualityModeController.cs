@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,9 +8,9 @@ public class DualityModeController : MonoBehaviour
     [SerializeField] GameObject world1;
     [SerializeField] GameObject world2;
     [SerializeField] private float potionConsumationSpeed = 0.01f;
-    [FormerlySerializedAs("spriteRainbowCharacter")] [SerializeField] AnimatorController animRainbowCharacter;
+    [FormerlySerializedAs("spriteRainbowCharacter")] [SerializeField] RuntimeAnimatorController animRainbowCharacter;
     [SerializeField] Sprite spriteRainbowCharacter;
-    [FormerlySerializedAs("spriteDarkCharacter")] [SerializeField] AnimatorController animDarkCharacter;
+    [FormerlySerializedAs("spriteDarkCharacter")] [SerializeField] RuntimeAnimatorController animDarkCharacter;
     [SerializeField] Sprite spriteDarkCharacter;
     private SpriteRenderer m_SpriteRenderer;
     private Animator m_SpriteAnimator;
@@ -48,7 +47,9 @@ public class DualityModeController : MonoBehaviour
             m_SpriteAnimator.enabled = true;
         }
         OnWorldSwitched?.Invoke(this, new WorldSwitched(WorldState));
+    }
 
+    private void FixedUpdate() {
         if (world2.activeInHierarchy) {
             controller.setPotionFillStatus(MathF.Max(0.0f, controller.getPotionFillStatus() - potionConsumationSpeed));
         }

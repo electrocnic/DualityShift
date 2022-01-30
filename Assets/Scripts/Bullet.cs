@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float projectileSpeed = 10;
     private Vector3 target;
     private GameObject origin;
+    private bool alreadyHit = false;
 
     private void Start()
     {
@@ -38,13 +39,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject == origin)
+        if (col.gameObject == origin || alreadyHit)
         {
             return;
         }
         var damageable = col.gameObject.GetComponent<Damageable>();
         if (damageable != null)
         {
+            alreadyHit = true;
             damageable.Damage(100f);
         }
     }
