@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Mono.Cecil;
 using Unity.VisualScripting;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 /**
  * Keymap:
@@ -27,11 +27,9 @@ public class WorldController : MonoBehaviour {
     [SerializeField] private float enemyMaxSpawnDistanceToPlayer = 10f;
     [SerializeField] GameObject world1;
     [SerializeField] GameObject world2;
-    private Random _random;
     private float lastShot = 0f;
     // Start is called before the first frame update
     void Start() {
-        _random = new Random();
         pfBirb.GetComponent<BirbAI>().target = controller.transform;
         pfBirb.GetComponent<BirbAI>().pfBullet = pfBullet;
         pfShroom.GetComponent<MushroomAI>().target = controller.transform;
@@ -54,13 +52,13 @@ public class WorldController : MonoBehaviour {
         }
         float t = Time.time;
         if (t - lastShot > enemySpawnRateInSeconds) {
-            float randEnemyType = (float)_random.NextDouble();
-            float randX = (float)_random.NextDouble() - 0.5f;
-            float randY = (float)_random.NextDouble();
+            float randX = Random.Range(0f, 1f) - 0.5f;
+            float randY = Random.Range(0f, 1f);
             float minDist = (randX > 0) ? enemyMinSpawnDistanceToPlayer : -enemyMinSpawnDistanceToPlayer;
             float maxDist = (randX > 0) ? enemyMaxSpawnDistanceToPlayer : -enemyMaxSpawnDistanceToPlayer;
             var playerPosition = (Vector2)controller.transform.position;
             float spawnAtX = MathF.Min(minDist, MathF.Max(maxDist, (randX + (maxDist - minDist) * 0.01f) * 100f + minDist));
+            var randEnemyType = Random.Range(0f, 1f);
 
             if ((randEnemyType < 0.5 && world1.activeInHierarchy || randEnemyType < 0.3) && Resources.FindObjectsOfTypeAll<BirbAI>().Length < maxEnemyCount) {
                 // spawn flyings more often in world1 and less often in world 2
@@ -83,7 +81,6 @@ public class WorldController : MonoBehaviour {
             }
 
             lastShot = Time.time;
-
         }
     }
 }
