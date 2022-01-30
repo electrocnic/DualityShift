@@ -40,7 +40,7 @@ public class WorldController : MonoBehaviour {
             Application.LoadLevel(Application.loadedLevel);
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadPlus)) {
+        if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Equals)) {
             controller.setPotionFillStatus(MathF.Min(1.0f,controller.getPotionFillStatus() + 0.3f));
         }
     }
