@@ -1,6 +1,7 @@
 using System;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DualityModeController : MonoBehaviour
 {
@@ -8,14 +9,18 @@ public class DualityModeController : MonoBehaviour
     [SerializeField] GameObject world1;
     [SerializeField] GameObject world2;
     [SerializeField] private float potionConsumationSpeed = 0.01f;
-    [SerializeField] AnimatorController spriteRainbowCharacter;
-    [SerializeField] AnimatorController spriteDarkCharacter;
+    [FormerlySerializedAs("spriteRainbowCharacter")] [SerializeField] AnimatorController animRainbowCharacter;
+    [SerializeField] Sprite spriteRainbowCharacter;
+    [FormerlySerializedAs("spriteDarkCharacter")] [SerializeField] AnimatorController animDarkCharacter;
+    [SerializeField] Sprite spriteDarkCharacter;
+    private SpriteRenderer m_SpriteRenderer;
     private Animator m_SpriteAnimator;
 
     public event EventHandler OnWorldSwitched;
     
     // Start is called before the first frame update
     void Start() {
+        m_SpriteRenderer = controller.GetComponent<SpriteRenderer>();
         m_SpriteAnimator = controller.GetComponent<Animator>();
     }
 
@@ -27,16 +32,20 @@ public class DualityModeController : MonoBehaviour
             WorldState = WorldSwitched.World.Dark;
             world2.SetActive(true);
             world1.SetActive(false);
-            //controller.GetComponent<SpriteRenderer>().sprite = spriteDarkCharacter;
-            m_SpriteAnimator.runtimeAnimatorController = spriteDarkCharacter;
+            m_SpriteRenderer.sprite = spriteDarkCharacter;
+            m_SpriteAnimator.runtimeAnimatorController = animDarkCharacter;
             controller.GetComponent<SpriteRenderer>().flipX = true;
+            
+            m_SpriteAnimator.enabled = true;
         } else if (controller.getPotionFillStatus() <= 0.0f || (leftShiftPressed && world2.activeInHierarchy)) {
             WorldState = WorldSwitched.World.Light;
             world1.SetActive(true);
             world2.SetActive(false);
-            // controller.GetComponent<SpriteRenderer>().sprite = spriteRainbowCharacter;
-            m_SpriteAnimator.runtimeAnimatorController = spriteRainbowCharacter;
+            m_SpriteRenderer.sprite = spriteRainbowCharacter;
+            m_SpriteAnimator.runtimeAnimatorController = animRainbowCharacter;
             controller.GetComponent<SpriteRenderer>().flipX = false;
+            
+            m_SpriteAnimator.enabled = true;
         }
         OnWorldSwitched?.Invoke(this, new WorldSwitched(WorldState));
 

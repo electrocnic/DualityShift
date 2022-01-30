@@ -13413,7 +13413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351412172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0000947, y: 1.5999999, z: -15}
+  m_LocalPosition: {x: -1.9999061, y: 1.5999999, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17524,8 +17524,10 @@ MonoBehaviour:
   world1: {fileID: 685317516}
   world2: {fileID: 410764973}
   potionConsumationSpeed: 0.0001
-  spriteRainbowCharacter: {fileID: 9100000, guid: 10f380bc5abdb160fb96c3a2ac225b8f, type: 2}
-  spriteDarkCharacter: {fileID: 9100000, guid: 5e44ec0a49e2363498e94048c7fd078e, type: 2}
+  animRainbowCharacter: {fileID: 9100000, guid: 10f380bc5abdb160fb96c3a2ac225b8f, type: 2}
+  spriteRainbowCharacter: {fileID: 21300000, guid: 72de0c64f2c6a498096698322c976a67, type: 3}
+  animDarkCharacter: {fileID: 9100000, guid: 5e44ec0a49e2363498e94048c7fd078e, type: 2}
+  spriteDarkCharacter: {fileID: 21300000, guid: 2c5f3b2250c31495db3ffcf7e90bb619, type: 3}
 --- !u!114 &1563685573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18020,7 +18022,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.7041097, y: 1}
+    m_SensorSize: {x: 2.428161, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

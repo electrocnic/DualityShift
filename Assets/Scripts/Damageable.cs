@@ -21,6 +21,9 @@ public class Damageable : MonoBehaviour
 
     public void Damage(float dmg)
     {
+        if (!gameObject || !m_Player) {
+            return;
+        }
         health -= dmg;
         if (health <= 0) {
             if (m_WorldController.Invincible && ReferenceEquals(m_Player, gameObject))
