@@ -18,7 +18,7 @@ public class PotionPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (ReferenceEquals(other.gameObject, m_CharacterController2d.gameObject))
+        if (!ReferenceEquals(other.gameObject, m_CharacterController2d.gameObject))
         {
             return;
         }
