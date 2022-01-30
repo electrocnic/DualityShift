@@ -16,7 +16,9 @@ public class MushroomAI : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D col) {
         var damageable = col.gameObject.GetComponent<Damageable>();
-        if (damageable != null && col.gameObject == target.gameObject)
+        if (damageable != null
+            && col.gameObject == target.gameObject
+            && !DamageOnPounce.isComingFromAbove(transform, damageable.transform, 20f))
         {
             damageable.Damage(100f);
         }
