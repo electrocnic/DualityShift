@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using System.Collections;
+using UnityEngine.Serialization;
 
 public class CharacterController2d : MonoBehaviour
 {
@@ -51,8 +53,14 @@ public class CharacterController2d : MonoBehaviour
 			OnCrouchEvent = new BoolEvent();
 	}
 
-	private void FixedUpdate()
-	{
+	private void Start() {
+		originalMaterial = GetComponent<SpriteRenderer>().material;
+		MakeInvincible(10f);
+	}
+
+	private void FixedUpdate() {
+		invincibilityDuration = Math.Max(0f, invincibilityDuration - Time.fixedDeltaTime);
+
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
@@ -179,5 +187,29 @@ public class CharacterController2d : MonoBehaviour
 
 	public float getPotionFillStatus() {
 		return m_PotionFillStatus;
+	}
+
+	public float invincibilityDuration;
+	[SerializeField] private Material flashMaterial;
+	private Material originalMaterial;
+
+	public void MakeInvincible(float duration) {
+		// Debug.Log("" + duration + " " + invincibilityDuration);
+		var startFlash = invincibilityDuration <= 0f;
+		invincibilityDuration += duration;
+		if (duration > 0f && startFlash) {
+			// Debug.Log("" + duration + " " + invincibilityDuration);
+			StartCoroutine(FlashWhiteWhileInvincible());
+		}
+	}
+
+	private IEnumerator FlashWhiteWhileInvincible() {
+		var sr = GetComponent<SpriteRenderer>();
+		while (invincibilityDuration > 0) {
+			// Debug.Log("Should be flashing now");
+			sr.material = flashMaterial;
+			yield return new WaitForSeconds(1f / 3f);
+			sr.material = originalMaterial;
+		}
 	}
 }
