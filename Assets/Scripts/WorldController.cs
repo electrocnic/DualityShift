@@ -34,11 +34,16 @@ public class WorldController : MonoBehaviour {
         _random = new Random();
         pfBirb.GetComponent<BirbAI>().target = controller.transform;
         pfBirb.GetComponent<BirbAI>().pfBullet = pfBullet;
+        pfShroom.GetComponent<MushroomAI>().target = controller.transform;
     }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.R)) {
             Application.LoadLevel(Application.loadedLevel);
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadPlus)) {
+            controller.setPotionFillStatus(MathF.Min(1.0f,controller.getPotionFillStatus() + 0.3f));
         }
     }
 
@@ -48,7 +53,7 @@ public class WorldController : MonoBehaviour {
             return;
         }
         float t = Time.time;
-        if (t - lastShot > enemySpawnRateInSeconds && Resources.FindObjectsOfTypeAll<BirbAI>().Length < maxEnemyCount) {
+        if (t - lastShot > enemySpawnRateInSeconds) {
             float randEnemyType = (float)_random.NextDouble();
             float randX = (float)_random.NextDouble() - 0.5f;
             float randY = (float)_random.NextDouble();
@@ -57,7 +62,7 @@ public class WorldController : MonoBehaviour {
             var playerPosition = (Vector2)controller.transform.position;
             float spawnAtX = MathF.Min(minDist, MathF.Max(maxDist, (randX + (maxDist - minDist) * 0.01f) * 100f + minDist));
 
-            if (randEnemyType < 0.5 && world1.activeInHierarchy || randEnemyType < 0.3) {
+            if ((randEnemyType < 0.5 && world1.activeInHierarchy || randEnemyType < 0.3) && Resources.FindObjectsOfTypeAll<BirbAI>().Length < maxEnemyCount) {
                 // spawn flyings more often in world1 and less often in world 2
                 // newPos - playerPos > minSpawnDistance  ==  randomVec > minSpawnDistance, because randomVec+playerPos = newPos
                 // newPos - enemyMaxSpawnDistanceToPlayer < playerPos, randomVec < maxSpawnDistance
@@ -70,7 +75,7 @@ public class WorldController : MonoBehaviour {
                 );
 
                 Instantiate(pfBirb, spwanPostion, Quaternion.identity);
-            } else if (randEnemyType >= 0.3 && world2.activeInHierarchy) {
+            } else if ((randEnemyType >= 0.3 && world2.activeInHierarchy) && Resources.FindObjectsOfTypeAll<MushroomAI>().Length < maxEnemyCount) {
                 // spawn ground enemies only in world 2 (and only if not flying was spawned).
                 Vector2 spwanPostion = playerPosition + new Vector2(spawnAtX, 0);
 
