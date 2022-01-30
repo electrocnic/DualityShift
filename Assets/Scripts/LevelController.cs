@@ -34,8 +34,7 @@ public class LevelController : MonoBehaviour {
         if (!player) {
             return;
         }
-
-        if (player == col.gameObject) {
+        if (ReferenceEquals(player, col.gameObject)) {
             goToNextLevel();
         }
     }
