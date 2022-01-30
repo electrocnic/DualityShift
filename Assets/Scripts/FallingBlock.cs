@@ -9,13 +9,15 @@ public class FallingBlock : MonoBehaviour {
     [SerializeField] private float risingSpeed = 2f;
     [SerializeField] private float riseDelay = 2f;
     [SerializeField] private float gravityScale = 2f;
-    [SerializeField] private Transform player;
+    private GameObject player;
     private DualityModeController dualityModeController;
 
     private bool movingUp = false;
 
     private Rigidbody2D rbRigidbody2D;
-    private void Start() {
+    private void Start()
+    {
+        player = Resources.FindObjectsOfTypeAll<CharacterController2d>()[0].gameObject;
         dualityModeController = Resources.FindObjectsOfTypeAll<DualityModeController>()[0];
         rbRigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -24,7 +26,7 @@ public class FallingBlock : MonoBehaviour {
         if (!player) {
             return;
         }
-        if (col.gameObject == player.gameObject && dualityModeController.WorldState == WorldSwitched.World.Light) {
+        if (col.gameObject == player && dualityModeController.WorldState == WorldSwitched.World.Light) {
             StartCoroutine(FallDown());
         }
         if (col.gameObject == player.gameObject && dualityModeController.WorldState == WorldSwitched.World.Dark) {
