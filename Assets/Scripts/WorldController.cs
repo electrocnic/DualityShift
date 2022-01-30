@@ -42,7 +42,7 @@ public class WorldController : MonoBehaviour {
             controller.setPotionFillStatus(MathF.Min(1.0f,controller.getPotionFillStatus() + 0.3f));
         }
 
-        if (Input.GetKeyDown(KeyCode.Slash))
+        if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             Invincible = !Invincible;
         }
