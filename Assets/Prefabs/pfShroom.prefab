@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8757629098032060597}
   - component: {fileID: -2207807639861440218}
   - component: {fileID: 193813810445332434}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pfShroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,10 +11,10 @@ TagManager:
   - CameraObstacles
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Obstacles and Ground
+  - Bullets
+  - Mobs
   - 
   - 
   - 

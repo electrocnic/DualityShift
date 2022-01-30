@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1421812627120727688}
   - component: {fileID: 1421812627120727689}
   - component: {fileID: 2645557235934823377}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pfBirb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,6 +130,8 @@ MonoBehaviour:
   horizontalDerivativeForceMultiplier: 100
   verticalDerivativeForceMultiplier: 10
   maxSpeed: 300
+  minShotDeltaTime: 0.3
+  maxShotDeltaTime: 3
 --- !u!58 &1421812627120727690
 CircleCollider2D:
   m_ObjectHideFlags: 0
