@@ -23,7 +23,7 @@ public class Damageable : MonoBehaviour
     {
         health -= dmg;
         if (health <= 0) {
-            if (m_WorldController.Invincible && Object.ReferenceEquals(m_Player, gameObject))
+            if (m_WorldController.Invincible && ReferenceEquals(m_Player, gameObject))
             {
                 return;
             }

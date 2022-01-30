@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageOnPounce : MonoBehaviour {
+public class DamageOnPounce : MonoBehaviour
+{
     [SerializeField] private float neededAngle = 20;
+
     private void OnCollisionEnter2D(Collision2D col) {
         var damageable = col.gameObject.GetComponent<Damageable>();
         if (damageable)
@@ -16,7 +18,8 @@ public class DamageOnPounce : MonoBehaviour {
             // Debug.Log("Angle: " + angle);
             if (angle > neededAngle && angle < (180f - neededAngle))
             {
-                damageable.Damage(400f);
+                var dmg = 50f * col.relativeVelocity.magnitude;
+                damageable.Damage(dmg);
             }
         }
     }
