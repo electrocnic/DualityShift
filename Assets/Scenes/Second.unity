@@ -24201,7 +24201,7 @@ PrefabInstance:
     - target: {fileID: 8202803215602027440, guid: fe340e272a32f4d1ca8f7d97cb853f74, type: 3}
       propertyPath: m_CharacterController2d
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1894140073}
     - target: {fileID: 8750809382633417820, guid: fe340e272a32f4d1ca8f7d97cb853f74, type: 3}
       propertyPath: m_Name
       value: Black Potion
