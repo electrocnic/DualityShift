@@ -18,7 +18,6 @@ using Random = UnityEngine.Random;
 public class WorldController : MonoBehaviour {
     [SerializeField] CharacterController2d controller;
 
-    [SerializeField] public Transform pfBullet;
     [SerializeField] private Transform pfBirb;
     [SerializeField] private Transform pfShroom;
     [SerializeField] private int maxEnemyCount = 5;
@@ -31,7 +30,6 @@ public class WorldController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         pfBirb.GetComponent<BirbAI>().target = controller.transform;
-        pfBirb.GetComponent<BirbAI>().pfBullet = pfBullet;
         pfShroom.GetComponent<MushroomAI>().target = controller.transform;
     }
 
@@ -43,7 +41,14 @@ public class WorldController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Equals)) {
             controller.setPotionFillStatus(MathF.Min(1.0f,controller.getPotionFillStatus() + 0.3f));
         }
+
+        if (Input.GetKeyDown(KeyCode.Slash))
+        {
+            Invincible = !Invincible;
+        }
     }
+
+    public bool Invincible { get; set; }
 
     // Update is called once per frame
     void FixedUpdate() {

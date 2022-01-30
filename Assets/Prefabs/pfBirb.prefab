@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  pfBullet: {fileID: 2929003950310744974, guid: f33ff74341fe539ac9236d10260d80e4, type: 3}
+  pfBullet: {fileID: 2929003950310744974, guid: 16bf01dc9b871581faea6fc35d0dc296, type: 3}
   maxForce: 100
   horizontalProporionalForceMultiplier: 10
   verticalProportionalForceMultiplier: 10

@@ -13,6 +13,10 @@ public class BirbAI : MonoBehaviour {
     [SerializeField] private float horizontalDerivativeForceMultiplier = 10f;
     [SerializeField] private float verticalDerivativeForceMultiplier = 10f;
     [SerializeField] private float maxSpeed = 400f;
+    [SerializeField] private float minShotDeltaTime = 0.3f;
+    [SerializeField] private float maxShotDeltaTime = 3f;
+
+    private float currentShotDeltaTime = 0;
     private Vector2 followOffset;
     private float lastShot = 0f;
     private Vector2 lastDPos = Vector2.zero;
@@ -25,6 +29,13 @@ public class BirbAI : MonoBehaviour {
         var phi = Random.Range((float)minAngle, (float)maxAngle);
         var r = Random.Range(4f, 10f);
         followOffset = new Vector2((float)Math.Cos(phi), (float)Math.Sin(phi)) * r;
+        lastShot = Time.time;
+        QueueNewShot();
+    }
+
+    void QueueNewShot()
+    {
+        currentShotDeltaTime = Random.Range(minShotDeltaTime, maxShotDeltaTime);
     }
 
     private void FixedUpdate() {
@@ -33,12 +44,13 @@ public class BirbAI : MonoBehaviour {
         }
 
         float t = Time.time;
-        if (t - lastShot > 1.4f && false) {
+        if (t - lastShot > 1.4f) {
             var bullet = Instantiate(pfBullet, transform.position, Quaternion.identity);
             var bullet2 = bullet.GetComponent<Bullet>();
             bullet2.Origin(gameObject);
             bullet2.Target(target.position);
-            lastShot = Time.time;
+            lastShot = t;
+            QueueNewShot();
         }
 
         var rb = GetComponent<Rigidbody2D>();
@@ -50,10 +62,8 @@ public class BirbAI : MonoBehaviour {
                             + new Vector2(ddpos.x * horizontalDerivativeForceMultiplier,
                                 ddpos.y * verticalDerivativeForceMultiplier);
         lastDPos = dpos;
-        Vector2 finalVel = new Vector2(Math.Clamp(controlOutput.x, -maxSpeed, maxSpeed),
-            Math.Clamp(controlOutput.y, -maxSpeed, maxSpeed));
         rb.AddForce(controlOutput);
-        // rb.velocity = finalVel;
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
