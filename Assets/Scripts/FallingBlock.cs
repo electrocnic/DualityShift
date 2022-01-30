@@ -9,6 +9,7 @@ public class FallingBlock : MonoBehaviour {
     [SerializeField] private float risingSpeed = 2f;
     [SerializeField] private float riseDelay = 2f;
     [SerializeField] private float gravityScale = 2f;
+    [SerializeField] private Transform player;
     private DualityModeController dualityModeController;
 
     private bool movingUp = false;
@@ -20,7 +21,7 @@ public class FallingBlock : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
-        if (dualityModeController.WorldState == WorldSwitched.World.Light) {
+        if (col.gameObject == player.gameObject && dualityModeController.WorldState == WorldSwitched.World.Light) {
             StartCoroutine(FallDown());
         }
     }
