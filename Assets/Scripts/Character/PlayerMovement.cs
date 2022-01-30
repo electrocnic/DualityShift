@@ -9,8 +9,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float horizontalMove = 0f;
     [SerializeField] private float acceleration = 1f;
-    [SerializeField] private float maxSpeed = 500f;
-    private bool jump = false;
+    [SerializeField] private float maxSpeed = 10f;
+    public bool jump = false;
+
+    public int jumpCounter = 0;
     private float dir = 0f;
 
     // Start is called before the first frame update
@@ -23,9 +25,21 @@ public class PlayerMovement : MonoBehaviour
     {
         dir = Input.GetAxisRaw("Horizontal");
         
-        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        
+        if (Input.GetButton("Jump") || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
+            if (jump == false)
+            {
+                if (jumpCounter < 1000000) {
+                    jumpCounter++;
+                } else {
+                    jumpCounter = 0;
+                }
+                
+            }
             jump = true;
+        } else {
+            jump = false;
         }
     }
 
@@ -42,12 +56,17 @@ public class PlayerMovement : MonoBehaviour
         }
         if (swapDirection)
         {
-            horizontalMove *= 0.6f;
+            if (controller.IsGrounded) {
+                horizontalMove *= 0.6f;
+            } else {
+                horizontalMove *= 0.9f;
+            }
+            
         }
         horizontalMove += dir * acceleration;
         horizontalMove = Math.Clamp(horizontalMove, -maxSpeed, maxSpeed);
 
-        if (dir == 0)
+        if (dir == 0 && controller.IsGrounded)
         {
             horizontalMove *= 0.95f;
             if (Math.Abs(horizontalMove) < 1f)
@@ -56,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-        jump = false;
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump, jumpCounter);
+        // jump = false;
     }
 }
