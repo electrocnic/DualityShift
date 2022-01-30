@@ -150,7 +150,7 @@ MonoBehaviour:
   fallDelay: 0.5
   disappearDelay: 200
   risingSpeed: 2
-  riseDelay: 0.5
+  riseDelay: 0.1
   gravityScale: 1
 --- !u!114 &-2652996109647508806
 MonoBehaviour:
