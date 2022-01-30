@@ -48,7 +48,7 @@ public class WorldController : MonoBehaviour {
         }
     }
 
-    public bool Invincible { get; set; }
+    public bool Invincible { get; set; } = true;
 
     // Update is called once per frame
     void FixedUpdate() {

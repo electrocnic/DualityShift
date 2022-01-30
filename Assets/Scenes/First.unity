@@ -5448,7 +5448,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1563685569}
-  pfBullet: {fileID: 2929003950310744974, guid: f33ff74341fe539ac9236d10260d80e4, type: 3}
   pfBirb: {fileID: 1421812627120727685, guid: 2400c11213e169c4181297d10f62c3f1, type: 3}
   pfShroom: {fileID: 3634460551429787039, guid: db9869f901ff0d9488da2793d4640bc4, type: 3}
   maxEnemyCount: 5
@@ -16982,14 +16981,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.085, y: 0.08}
-      - {x: -0.125, y: 0.02}
-      - {x: -0.125, y: -0.12}
-      - {x: -0.105, y: -0.16}
-      - {x: 0.035, y: -0.16}
-      - {x: 0.095, y: -0.11}
-      - {x: 0.095, y: 0.049999997}
-      - {x: 0.085, y: 0.08}
+    - - {x: -0.04466686, y: 0.058067705}
+      - {x: -0.06910683, y: 0.0021235049}
+      - {x: -0.0932137, y: -0.046751287}
+      - {x: -0.05983801, y: -0.12}
+      - {x: -0.0461953, y: -0.16158934}
+      - {x: 0.031821404, y: -0.14251748}
+      - {x: 0.055267114, y: -0.10523204}
+      - {x: 0.07116024, y: 0.00073118135}
+      - {x: 0.067517534, y: 0.051392294}
 --- !u!114 &1563685569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17842,6 +17842,22 @@ PrefabInstance:
     - target: {fileID: 1637343267300628956, guid: fe340e272a32f4d1ca8f7d97cb853f74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5016531528451913614, guid: fe340e272a32f4d1ca8f7d97cb853f74, type: 3}
+      propertyPath: m_Size.x
+      value: 2.212226
+      objectReference: {fileID: 0}
+    - target: {fileID: 5016531528451913614, guid: fe340e272a32f4d1ca8f7d97cb853f74, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5527992
+      objectReference: {fileID: 0}
+    - target: {fileID: 5016531528451913614, guid: fe340e272a32f4d1ca8f7d97cb853f74, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.04057622
+      objectReference: {fileID: 0}
+    - target: {fileID: 5016531528451913614, guid: fe340e272a32f4d1ca8f7d97cb853f74, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.010433912
       objectReference: {fileID: 0}
     - target: {fileID: 8202803215602027440, guid: fe340e272a32f4d1ca8f7d97cb853f74, type: 3}
       propertyPath: m_CharacterController2d

@@ -20,22 +20,21 @@ public class FallingBlock : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
-        StartCoroutine(FallDown());
+        if (dualityModeController.WorldState == WorldSwitched.World.Light) {
+            StartCoroutine(FallDown());
+        }
     }
 
     private void FixedUpdate() {
-        switch (dualityModeController.WorldState)
-        {
-            case WorldSwitched.World.Light:
-                rbRigidbody2D.gravityScale = Math.Abs(rbRigidbody2D.gravityScale);
-                break;
-            case WorldSwitched.World.Dark:
-                if (!movingUp) {
-                    movingUp = true;
+        if (!movingUp) {
+            switch (dualityModeController.WorldState) {
+                case WorldSwitched.World.Light:
+                    rbRigidbody2D.gravityScale = Math.Abs(rbRigidbody2D.gravityScale);
+                    break;
+                case WorldSwitched.World.Dark:
                     StartCoroutine(MoveUp());
-                }
-
-                break;
+                    break;
+            }
         }
     }
 
@@ -49,9 +48,10 @@ public class FallingBlock : MonoBehaviour {
     }
     
     private IEnumerator MoveUp() {
+        movingUp = true;
         yield return new WaitForSeconds(riseDelay);
         rbRigidbody2D.gravityScale = 0;
         rbRigidbody2D.velocity = Vector2.up * risingSpeed;
-        rbRigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+        rbRigidbody2D.bodyType = RigidbodyType2D.Kinematic;
     }
 }
