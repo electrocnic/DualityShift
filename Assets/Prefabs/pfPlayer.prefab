@@ -336,7 +336,7 @@ MonoBehaviour:
   acceleration: 8
   maxSpeed: 150
   m_JumpForce: 130
-  m_JumpSlope: 2000
+  m_JumpSlope: 1200
   m_MaxJumpHeight: 3
 --- !u!114 &7149087815283810863
 MonoBehaviour:
