@@ -21,21 +21,20 @@ public class FallingBlock : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
+        if (!player) {
+            return;
+        }
         if (col.gameObject == player.gameObject && dualityModeController.WorldState == WorldSwitched.World.Light) {
             StartCoroutine(FallDown());
+        }
+        if (col.gameObject == player.gameObject && dualityModeController.WorldState == WorldSwitched.World.Dark) {
+            StartCoroutine(MoveUp());
         }
     }
 
     private void FixedUpdate() {
-        if (!movingUp) {
-            switch (dualityModeController.WorldState) {
-                case WorldSwitched.World.Light:
-                    rbRigidbody2D.gravityScale = Math.Abs(rbRigidbody2D.gravityScale);
-                    break;
-                case WorldSwitched.World.Dark:
-                    StartCoroutine(MoveUp());
-                    break;
-            }
+        if (!movingUp && dualityModeController.WorldState == WorldSwitched.World.Light) {
+            rbRigidbody2D.gravityScale = Math.Abs(rbRigidbody2D.gravityScale);
         }
     }
 
