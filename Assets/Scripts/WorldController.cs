@@ -67,6 +67,9 @@ public class WorldController : MonoBehaviour {
                 MathF.Max(maxDist, (randX + (maxDist - minDist) * 0.01f) * 100f + minDist));
             var randEnemyType = Random.Range(0f, 1f);
 
+            if (!(world1.activeInHierarchy ^ world1.activeInHierarchy)) {
+                return;
+            }
             if ((randEnemyType < 0.5 && world1.activeInHierarchy || randEnemyType < 0.3) &&
                 Resources.FindObjectsOfTypeAll<BirbAI>().Length < maxEnemyCount) {
                 // spawn flyings more often in world1 and less often in world 2
