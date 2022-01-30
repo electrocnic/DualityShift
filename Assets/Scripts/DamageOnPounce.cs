@@ -13,7 +13,7 @@ public class DamageOnPounce : MonoBehaviour {
             var otherCom = col.transform.position;
             var d = com - otherCom;
             var angle = Vector2.SignedAngle(d, Vector2.left);
-            Debug.Log("Angle: " + angle);
+            // Debug.Log("Angle: " + angle);
             if (angle > neededAngle && angle < (180f - neededAngle))
             {
                 damageable.Damage(400f);
