@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mono.Cecil;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -25,17 +26,23 @@ public class WorldController : MonoBehaviour {
     [SerializeField] private float enemyMaxSpawnDistanceToPlayer = 10f;
     [SerializeField] GameObject world1;
     [SerializeField] GameObject world2;
+    [SerializeField] TextMeshProUGUI levelStatsTextField;
+    public static bool isDead = false;
 
+    private GameObject player;
     private float lastShot = 0f;
 
     // Start is called before the first frame update
     void Start() {
+        player = Resources.FindObjectsOfTypeAll<CharacterController2d>()[0].gameObject;
         pfBirb.GetComponent<BirbAI>().target = controller.transform;
         pfShroom.GetComponent<MushroomAI>().target = controller.transform;
     }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.R)) {
+            isDead = false;
+            levelStatsTextField.SetText("");
             Application.LoadLevel(Application.loadedLevel);
         }
 
@@ -52,6 +59,10 @@ public class WorldController : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
+        if (isDead) {
+            displayDeathMessage();
+        }
+        
         if (!controller) {
             return;
         }
@@ -82,16 +93,25 @@ public class WorldController : MonoBehaviour {
                             (randY + (enemyMaxSpawnDistanceToPlayer - enemyMinSpawnDistanceToPlayer) * 0.01f) * 100f +
                             enemyMinSpawnDistanceToPlayer))
                 );
-                Instantiate(pfBirb, spwanPostion, Quaternion.identity);
+                var birb = Instantiate(pfBirb, spwanPostion, Quaternion.identity);
+                birb.GetComponent<Damageable>().objectId = "birb";
                 lastShot = t;
             }
             else if ((randEnemyType >= 0.3 && world2.activeInHierarchy) &&
                      Resources.FindObjectsOfTypeAll<MushroomAI>().Length < maxEnemyCount) {
                 // spawn ground enemies only in world 2 (and only if not flying was spawned).
                 Vector2 spwanPostion = new Vector2(playerPosition.x + spawnAtX, 0);
-                Instantiate(pfShroom, spwanPostion, Quaternion.identity);
+                var shroom = Instantiate(pfShroom, spwanPostion, Quaternion.identity);
+                shroom.GetComponent<Damageable>().objectId = "shroom";
                 lastShot = t;
             }
         }
+    }
+
+    public void displayDeathMessage() {
+        levelStatsTextField.SetText("You died!\nKilled Birbs: "
+                                    + Scoring.getKilledBirbs()
+                                    + "\nKilled shrooms: " + Scoring.getKilledShrooms()
+                                    + "\nDeaths in this level: " + Scoring.getDeaths());
     }
 }

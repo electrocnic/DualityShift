@@ -37,15 +37,16 @@ public class Bullet : MonoBehaviour
         this.origin = origin;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
+    private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject == origin || alreadyHit)
         {
             return;
         }
+
         var damageable = col.gameObject.GetComponent<Damageable>();
         if (damageable != null)
         {
+            string enemyType = damageable.objectId;
             alreadyHit = true;
             damageable.Damage(100f);
         }

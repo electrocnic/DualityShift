@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
     [SerializeField] private string nextLevelName;
+
+    public static int currentLevel = 0;
     // [SerializeField] private Transform levelExitTarget;
     private GameObject player;
     
@@ -27,6 +29,7 @@ public class LevelController : MonoBehaviour {
     }
 
     private void goToNextLevel() {
+        currentLevel++;
         SceneManager.LoadScene(nextLevelName);
     }
 

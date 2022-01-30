@@ -317,6 +317,8 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+  invincibilityDuration: 0
+  flashMaterial: {fileID: 0}
 --- !u!114 &7149087815283810862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   pfPuff: {fileID: 6433890382240477646, guid: e0c2985287cbca945abe701374ab3f58, type: 3}
+  objectId: player
 --- !u!114 &7149087815283810858
 MonoBehaviour:
   m_ObjectHideFlags: 0

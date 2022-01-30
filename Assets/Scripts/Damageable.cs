@@ -3,6 +3,7 @@ using UnityEngine;
 public class Damageable : MonoBehaviour {
     [SerializeField] private float health = 100f;
     [SerializeField] private Transform pfPuff;
+    [SerializeField] public string objectId;
     private WorldController m_WorldController;
     private CharacterController2d m_Player;
 
@@ -25,6 +26,17 @@ public class Damageable : MonoBehaviour {
         if ((m_WorldController.Invincible || m_Player.invincibilityDuration > 0) &&
             ReferenceEquals(m_Player.gameObject, gameObject)) {
             return;
+        }
+        
+        if (objectId == "birb") {
+            Scoring.incrementBirbs();
+        } else if (objectId == "baps") {
+            Scoring.incrementBaps();
+        } else if (objectId == "shroom") {
+            Scoring.incrementShrooms();
+        } else if (objectId == "player") {
+            Scoring.incrementDeaths();
+            WorldController.isDead = true;
         }
 
         var puffRef = Instantiate(pfPuff, gameObject.transform.position, Quaternion.identity);
