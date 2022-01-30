@@ -19,7 +19,6 @@ public class DamageOnPounce : MonoBehaviour
             if (angle > neededAngle && angle < (180f - neededAngle))
             {
                 var dmg = 50f * col.relativeVelocity.magnitude;
-                Debug.Log(dmg);
                 damageable.Damage(dmg);
             }
         }
