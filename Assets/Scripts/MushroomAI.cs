@@ -32,7 +32,7 @@ public class MushroomAI : MonoBehaviour
         }
         
         var rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(dir * movingSpeed, 0);
+        rb.velocity = new Vector2(dir * movingSpeed, rb.velocity.y);
         // rb.AddForce(new Vector2(target.position.x, 0));
     }
 }
