@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using System.Collections;
+using UnityEngine.Serialization;
 
 public class CharacterController2d : MonoBehaviour
 {
@@ -45,6 +47,14 @@ public class CharacterController2d : MonoBehaviour
 			OnCrouchEvent = new BoolEvent();
 	}
 
+	private void Start() {
+		originalMaterial = GetComponent<SpriteRenderer>().material;
+		MakeInvincible(10f);
+	}
+
+	private void FixedUpdate() {
+		invincibilityDuration = Math.Max(0f, invincibilityDuration - Time.fixedDeltaTime);
+	}
 
 	public void Move(float move, bool crouch)
 	{
@@ -153,6 +163,30 @@ public class CharacterController2d : MonoBehaviour
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject.layer == 7 || collision.gameObject.layer == 0) {
 			m_Grounded = true;
+		}
+	}
+
+	public float invincibilityDuration;
+	[SerializeField] private Material flashMaterial;
+	private Material originalMaterial;
+
+	public void MakeInvincible(float duration) {
+		// Debug.Log("" + duration + " " + invincibilityDuration);
+		var startFlash = invincibilityDuration <= 0f;
+		invincibilityDuration += duration;
+		if (duration > 0f && startFlash) {
+			// Debug.Log("" + duration + " " + invincibilityDuration);
+			StartCoroutine(FlashWhiteWhileInvincible());
+		}
+	}
+
+	private IEnumerator FlashWhiteWhileInvincible() {
+		var sr = GetComponent<SpriteRenderer>();
+		while (invincibilityDuration > 0) {
+			// Debug.Log("Should be flashing now");
+			sr.material = flashMaterial;
+			yield return new WaitForSeconds(1f / 3f);
+			sr.material = originalMaterial;
 		}
 	}
 }
