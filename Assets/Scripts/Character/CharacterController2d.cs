@@ -49,6 +49,7 @@ public class CharacterController2d : MonoBehaviour
 
 	private void Start() {
 		originalMaterial = GetComponent<SpriteRenderer>().material;
+		// MakeInvincible(10f);
 	}
 
 	private void FixedUpdate() {
@@ -182,7 +183,6 @@ public class CharacterController2d : MonoBehaviour
 	private IEnumerator FlashWhiteWhileInvincible() {
 		var sr = GetComponent<SpriteRenderer>();
 		while (invincibilityDuration > 0) {
-			Debug.Log("Should be flashing now");
 			sr.material = flashMaterial;
 			yield return new WaitForSeconds(1f / 5f);
 			sr.material = originalMaterial;
