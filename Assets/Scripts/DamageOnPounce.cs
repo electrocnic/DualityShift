@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageOnPounce : MonoBehaviour {
-    [SerializeField] private float neededAngle = 40;
+    [SerializeField] private float neededAngle = 20;
     private void OnCollisionEnter2D(Collision2D col) {
         var damageable = col.gameObject.GetComponent<Damageable>();
         if (damageable)
