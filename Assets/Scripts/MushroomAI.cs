@@ -13,6 +13,14 @@ public class MushroomAI : MonoBehaviour
 
     private void Start() {
     }
+    
+    private void OnCollisionEnter2D(Collision2D col) {
+        var damageable = col.gameObject.GetComponent<Damageable>();
+        if (damageable != null && col.gameObject == target.gameObject)
+        {
+            damageable.Damage(100f);
+        }
+    }
 
     private void FixedUpdate() {
         if (!target) {

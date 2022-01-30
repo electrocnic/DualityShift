@@ -48,7 +48,7 @@ public class WorldController : MonoBehaviour {
         }
     }
 
-    public bool Invincible { get; set; } = true;
+    public bool Invincible { get; set; } = false;
 
     // Update is called once per frame
     void FixedUpdate() {
@@ -80,8 +80,7 @@ public class WorldController : MonoBehaviour {
                 Instantiate(pfBirb, spwanPostion, Quaternion.identity);
             } else if ((randEnemyType >= 0.3 && world2.activeInHierarchy) && Resources.FindObjectsOfTypeAll<MushroomAI>().Length < maxEnemyCount) {
                 // spawn ground enemies only in world 2 (and only if not flying was spawned).
-                Vector2 spwanPostion = playerPosition + new Vector2(spawnAtX, 0);
-
+                Vector2 spwanPostion = new Vector2(playerPosition.x + spawnAtX, 0);
                 Instantiate(pfShroom, spwanPostion, Quaternion.identity);
             }
 
