@@ -36,6 +36,8 @@ public class SpriteSwitcher : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        dualityModeController.OnWorldSwitched -= DualityModeControllerOnOnWorldSwitched;
+        if (dualityModeController) {
+            dualityModeController.OnWorldSwitched -= DualityModeControllerOnOnWorldSwitched;
+        }
     }
 }
