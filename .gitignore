@@ -30,6 +30,8 @@
 # Visual Studio Code
 .vscode/
 
+bin/
+
 # Jetbrains
 .idea/
 
